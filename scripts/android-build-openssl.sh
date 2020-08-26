@@ -45,7 +45,7 @@ function build {
 	BASE=$(pwd)
 	DST_DIR=$BUILD_DST/$DST_PREFIX
 	common_run cd $BUILD_SRC
-	common_run ./Configure --config=$SCRIPT_PATH/openssl-mips64.conf --openssldir=$DST_DIR $CONFIG no-shared 
+	common_run ./Configure --config=$SCRIPT_PATH/openssl-mips64.conf --openssldir=$DST_DIR $CONFIG
 	common_run make CALC_VERSIONS="SHLIB_COMPAT=; SHLIB_SOVER=" -j depend
 	common_run make CALC_VERSIONS="SHLIB_COMPAT=; SHLIB_SOVER=" -j build_libs
 
@@ -54,8 +54,9 @@ function build {
 		common_run mkdir -p $DST_DIR
 	fi
 
-	SONAME=libfreerdp-openssl.so
-	common_run ${CROSS_COMPILE}gcc --sysroot=${CROSS_SYSROOT} -shared -fPIC -Wl,-soname,$SONAME -o $DST_DIR/$SONAME -Wl,-whole-archive libcrypto.a libssl.a -Wl,-no-whole-archive
+	#SONAME=libfreerdp-openssl.so
+	#common_run ${CROSS_COMPILE}gcc --sysroot=${CROSS_SYSROOT} -shared -fPIC -Wl,-soname,$SONAME -o $DST_DIR/$SONAME -Wl,-whole-archive libcrypto.a libssl.a -Wl,-no-whole-archive
+	common_run cp *.so $DST_DIR/
 	common_run cd $BASE
 }
 
