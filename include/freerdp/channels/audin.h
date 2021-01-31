@@ -24,4 +24,6 @@
 #include <freerdp/dvc.h>
 #include <freerdp/types.h>
 
+#define AUDIN_DVC_CHANNEL_NAME "AUDIO_INPUT"
+
 #endif /* FREERDP_CHANNEL_AUDIN_H */

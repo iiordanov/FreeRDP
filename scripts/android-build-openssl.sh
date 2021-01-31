@@ -20,18 +20,9 @@ function build {
 	TOOLCHAIN_PREFIX=$4
 	PLATFORM_PREFIX=$5
 
-	TMP_DIR=$ANDROID_NDK/toolchains/$TOOLCHAIN_PREFIX$COMPILER/prebuilt/
-	HOST_PLATFORM=$(ls $TMP_DIR)
-	if [ ! -d $TMP_DIR$HOST_POLATFORM ];
-	then
-		echo "could not determine NDK host platform in $ANDROID_NDK/toolchains/$TOOLCHAIN_PREFIX$COMPILER/prebuilt/"
-		exit 1
-	fi
-
-	common_run export CROSS_SYSROOT=$ANDROID_NDK/platforms/android-$NDK_TARGET/$PLATFORM_PREFIX
-	common_run export ANDROID_DEV=$ANDROID_NDK/platforms/android-$NDK_TARGET/$PLATFORM_PREFIX/usr
-	common_run export CROSS_COMPILE="$CCACHE $ARCH_PREFIX"
-	common_run export PATH=$ANDROID_NDK/toolchains/$TOOLCHAIN_PREFIX$COMPILER/prebuilt/$HOST_PLATFORM/bin/:$ORG_PATH
+    common_run export CC=clang
+    common_run export PATH=$(${SCRIPT_PATH}/toolchains_path.py --ndk ${ANDROID_NDK}):$ORG_PATH
+    common_run export ANDROID_NDK
 
 	echo "CONFIG=$CONFIG"
 	echo "ARCH_PREFIX=$ARCH_PREFIX"

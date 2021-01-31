@@ -1,8 +1,9 @@
 /**
  * FreeRDP: A Remote Desktop Protocol Implementation
- * MacFreeRDP
+ * Audio Input Redirection Virtual Channel
  *
- * Copyright 2012 Thomas Goddard
+ * Copyright 2020 Armin Novak <anovak@thincast.com>
+ * Copyright 2020 Thincast Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +18,13 @@
  * limitations under the License.
  */
 
-#import <Cocoa/Cocoa.h>
+#ifndef FREERDP_CHANNEL_ECHO_H
+#define FREERDP_CHANNEL_ECHO_H
 
-int main(int argc, const char *argv[])
-{
-	return NSApplicationMain(argc, argv);
-}
+#include <freerdp/api.h>
+#include <freerdp/dvc.h>
+#include <freerdp/types.h>
+
+#define ECHO_DVC_CHANNEL_NAME "ECHO"
+
+#endif /* FREERDP_CHANNEL_ECHO_H */
